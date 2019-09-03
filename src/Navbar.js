@@ -33,7 +33,7 @@ class Navbar extends Component {
     }
 
     render() {
-        const {level, changeLevel } = this.props;
+        const {level, changeLevel, showingAllColors } = this.props;
         const { format } = this.state;
         return (
             <header className="Navbar">
@@ -42,7 +42,7 @@ class Navbar extends Component {
                     reactcolorpicker
                 </div>
                 </Link>
-                <div className="slider">
+                {showingAllColors && (<div className="slider">
                     <div className="slider-container">
                         <span>Level:{level}</span>
                         <Slider 
@@ -54,6 +54,7 @@ class Navbar extends Component {
                         />
                     </div>
                 </div>
+                )}
                 <div className="select-container">
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value='hex'>Hex - #000000</MenuItem>
