@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
 import Slider from 'rc-slider';
 import Select from "@material-ui/core/Select";
 import MenuItem from '@material-ui/core/MenuItem';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import styles from './styles/NavBarStyles';
 
 class Navbar extends Component {
     constructor(props) {
@@ -33,17 +33,17 @@ class Navbar extends Component {
     }
 
     render() {
-        const {level, changeLevel, showingAllColors } = this.props;
+        const {level, changeLevel, showingAllColors, classes } = this.props;
         const { format } = this.state;
         return (
-            <header className="Navbar">
+            <header className={classes.Navbar}>
                 <Link exact to="/">
-                <div className="logo">
+                <div className={classes.logo}>
                     reactcolorpicker
                 </div>
                 </Link>
-                {showingAllColors && (<div className="slider">
-                    <div className="slider-container">
+                {showingAllColors && (<div className={classes.slider}>
+                    <div className={classes.sliderContainer}>
                         <span>Level:{level}</span>
                         <Slider 
                         defaultValue={level} 
@@ -55,7 +55,7 @@ class Navbar extends Component {
                     </div>
                 </div>
                 )}
-                <div className="select-container">
+                <div className={classes.selectContainer}>
                     <Select value={format} onChange={this.handleFormatChange}>
                         <MenuItem value='hex'>Hex - #000000</MenuItem>
                         <MenuItem value='rgb'>RGB - rgb(255, 255, 255)</MenuItem>
@@ -89,4 +89,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default withStyles(styles)(Navbar);
