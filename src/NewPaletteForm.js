@@ -92,7 +92,7 @@ class NewPaletteForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeColor = this.removeColor.bind(this);
     this.clearColors = this.clearColors.bind(this);
-
+    this.addRandomColor = this.addRandomColor.bind(this);
   }
   componentDidMount() {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -150,6 +150,15 @@ class NewPaletteForm extends Component {
 
   clearColors() {
     this.setState({colors: []});
+  }
+
+  addRandomColor() {
+    // pick a random color from existing palette
+    const allColors = this.props.palettes.map( p => p.colors).flat();
+    const rand = Math.floor(Math.random() * allColors.length);
+    const randomColor = allColors[rand];
+    this.setState({ colors: [...this.state.colors, randomColor]});
+    console.log(allColors);
   }
 
   removeColor(colorName) {
@@ -227,7 +236,7 @@ class NewPaletteForm extends Component {
             <Button variant='contained' color='secondary' onClick={this.clearColors}>
               Clear Palette
             </Button>
-            <Button variant='contained' color='primary'>
+            <Button variant='contained' color='primary' onClick={this.addRandomColor}>
               Random Color
             </Button>
           </div>
