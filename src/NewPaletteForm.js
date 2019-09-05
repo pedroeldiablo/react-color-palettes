@@ -83,7 +83,7 @@ class NewPaletteForm extends Component {
       open: true,
       currentColor: "teal",
       newColorName: "",
-      colors: [{ color: "blue", name: "blue" }],
+      colors: this.props.palettes[0].colors,
       newPaletteName: ""
     };
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
@@ -91,6 +91,8 @@ class NewPaletteForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removeColor = this.removeColor.bind(this);
+    this.clearColors = this.clearColors.bind(this);
+
   }
   componentDidMount() {
     ValidatorForm.addValidationRule("isColorNameUnique", value =>
@@ -144,6 +146,10 @@ class NewPaletteForm extends Component {
     };
     this.props.savePalette(newPalette);
     this.props.history.push("/");
+  }
+
+  clearColors() {
+    this.setState({colors: []});
   }
 
   removeColor(colorName) {
@@ -218,7 +224,7 @@ class NewPaletteForm extends Component {
           <Divider />
           <Typography variant='h4'>Design Your Palette</Typography>
           <div>
-            <Button variant='contained' color='secondary'>
+            <Button variant='contained' color='secondary' onClick={this.clearColors}>
               Clear Palette
             </Button>
             <Button variant='contained' color='primary'>
