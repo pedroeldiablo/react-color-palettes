@@ -7,8 +7,6 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Button from "@material-ui/core/Button";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { ChromePicker } from "react-color";
 import DraggableColorList from './DraggableColorList';
 import arrayMove from 'array-move';
 import PaletteFormNav from './PaletteFormNav';
@@ -91,19 +89,6 @@ class NewPaletteForm extends Component {
     this.clearColors = this.clearColors.bind(this);
     this.addRandomColor = this.addRandomColor.bind(this);
   }
-
-  componentDidMount() {
-    ValidatorForm.addValidationRule("isColorNameUnique", value =>
-      this.state.colors.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      )
-    );
-    ValidatorForm.addValidationRule("isColorUnique", value =>
-      this.state.colors.every(
-          ({ color }) => color !== this.state.currentColor)
-    );
-  }
-
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -204,7 +189,7 @@ class NewPaletteForm extends Component {
           <ColorPickerForm 
           paletteIsFull={paletteIsFull} 
           addNewColor={this.addNewColor}
-          colors= {this.colors}
+          colors= {colors}
           />
         </Drawer>
         <main
