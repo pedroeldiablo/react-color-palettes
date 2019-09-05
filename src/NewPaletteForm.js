@@ -77,6 +77,9 @@ const styles = theme => ({
 });
 
 class NewPaletteForm extends Component {
+  static defaultProps = {
+    maxColors: 20
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -158,7 +161,6 @@ class NewPaletteForm extends Component {
     const rand = Math.floor(Math.random() * allColors.length);
     const randomColor = allColors[rand];
     this.setState({ colors: [...this.state.colors, randomColor]});
-    console.log(allColors);
   }
 
   removeColor(colorName) {
@@ -176,8 +178,9 @@ class NewPaletteForm extends Component {
 
 
   render() {
-    const { classes } = this.props;
-    const { open } = this.state;
+    const { classes, maxColors } = this.props;
+    const { open, colors } = this.state;
+    const paletteIsFull = colors.length >= maxColors;
 
     return (
       <div className={classes.root}>
@@ -236,7 +239,12 @@ class NewPaletteForm extends Component {
             <Button variant='contained' color='secondary' onClick={this.clearColors}>
               Clear Palette
             </Button>
-            <Button variant='contained' color='primary' onClick={this.addRandomColor}>
+            <Button 
+            disabled={paletteIsFull}
+            variant='contained' 
+            color='primary' 
+            onClick={this.addRandomColor}
+            >
               Random Color
             </Button>
           </div>
@@ -260,9 +268,11 @@ class NewPaletteForm extends Component {
               variant='contained'
               type='submit'
               color='primary'
-              style={{ backgroundColor: this.state.currentColor }}
+              disabled={paletteIsFull}
+              style={{ backgroundColor: paletteIsFull ? "grey" : this.state.currentColor }}
             >
-              Add Color
+              {paletteIsFull ? "Palette is full" : "Add Color"}
+              
             </Button>
           </ValidatorForm>
         </Drawer>
@@ -273,7 +283,7 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
          <DraggableColorList 
-         colors={this.state.colors} 
+         colors={colors} 
          removeColor={this.removeColor} 
          axis="xy"
          onSortEnd = {this.onSortEnd}
