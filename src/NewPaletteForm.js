@@ -12,6 +12,7 @@ import arrayMove from 'array-move';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import styles from './styles/NewPaletteFormStyles';
+import seedPalettes from './seedPalettes';
 class NewPaletteForm extends Component {
   static defaultProps = {
     maxColors: 20
@@ -20,7 +21,7 @@ class NewPaletteForm extends Component {
     super(props);
     this.state = {
       open: true,
-      colors: this.props.palettes[0].colors,
+      colors: seedPalettes[0].colors,
     };
     this.addNewColor = this.addNewColor.bind(this);
     this.handleChange = this.handleChange.bind(this);
