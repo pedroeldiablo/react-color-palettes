@@ -14,16 +14,15 @@ class SingleColorPalette extends Component {
         this.changeFormat = this.changeFormat.bind(this);
     }
     gatherShades(palette, colorToFilterBy){
-        let shades = []
-        let allColors = palette.colors
+        let shades = [];
+        let allColors = palette.colors;
+
         for(let key in allColors) {
             shades = shades.concat(
                 allColors[key].filter(color => color.id === colorToFilterBy)
-            )
-
+            );
         }
         return shades.slice(1);
-
     }
 
     changeFormat(val){

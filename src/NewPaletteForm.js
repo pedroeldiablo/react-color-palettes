@@ -61,7 +61,6 @@ class NewPaletteForm extends Component {
   }
 
   addRandomColor() {
-    // pick a random color from existing palette
     const allColors = this.props.palettes.map( p => p.colors).flat();
     const rand = Math.floor(Math.random() * allColors.length);
     const randomColor = allColors[rand];
