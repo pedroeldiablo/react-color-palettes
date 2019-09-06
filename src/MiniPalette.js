@@ -7,12 +7,17 @@ class MiniPalette extends PureComponent {
     constructor(props) {
         super(props);
         this.deletePalette = this.deletePalette.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     deletePalette(e){
         e.stopPropagation()
         this.props.openDeleteDialog(this.props.id);
 
+    }
+    
+    handleClick() {
+        this.props.goToPalette(this.props.id);
     }
     
     
@@ -27,7 +32,7 @@ class MiniPalette extends PureComponent {
             />
         ))
         return (
-            <div className={classes.root} onClick={() => handleClick(id)}>
+            <div className={classes.root} onClick={this.handleClick}>
                 <DeleteIcon  
                     className={classes.deleteIcon}
                     style={{transition: "all 300ms ease-in-out"}}
