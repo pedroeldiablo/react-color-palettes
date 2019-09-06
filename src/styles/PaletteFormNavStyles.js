@@ -1,9 +1,17 @@
+import sizes from './sizes';
 import { DRAWER_WIDTH }  from '../constants';
 const drawerWidth = DRAWER_WIDTH;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex", 
+    "& h6" :{
+      [sizes.down("xs")]: {
+        padding: "2px",
+        fontSize: "10px"
+      },
+
+    },
   },
   hide: {
     display: "none"
@@ -35,10 +43,20 @@ const styles = theme => ({
     marginRight: "1rem",
     "& a" : {
       textDecoration: "none"
-    }
+    },
+    [sizes.down("xs")]: {
+      padding: "2px",
+      fontSize: "10px",
+      marginRight: "0",
+    },
   },
   button: {
     margin: "0 0.5rem",
+    [sizes.down("xs")]: {
+      padding: "2px",
+      fontSize: "10px",
+      margin: "0"
+    },
   }
 
 });
